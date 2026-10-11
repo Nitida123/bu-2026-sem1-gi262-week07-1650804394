@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assignment
@@ -61,8 +62,6 @@ namespace Assignment
                     break;
             }
             
-
-            
             return new[] { row, col };
         }
 
@@ -106,17 +105,62 @@ namespace Assignment
 
         public int[] AS01_FindFirstAndLastElementOfArray(int[] array, int target)
         {
-            throw new NotImplementedException();
+            int first = -1;
+            int last = -1;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == target)
+                {
+                    if (first == -1)
+                    {
+                        first = i;
+                    }
+                    last = i;
+                }
+            }
+
+            if (first == -1)
+            {
+                return new int[] { -1 };
+            }
+
+            return new int[] { first, last };
         }
 
         public int AS02_FindMaxLessThan(int[] array, int target)
         {
-            throw new NotImplementedException();
+            int maxVal = -1;
+            bool found = false;
+
+            foreach (int num in array)
+            {
+                if (num < target)
+                {
+                    if (!found || num > maxVal)
+                    {
+                        maxVal = num;
+                        found = true;
+                    }
+                }
+            }
+
+            return found ? maxVal : -1;
         }
 
         public int[] AS03_FindRange(int[] array, int min, int max)
         {
-            throw new NotImplementedException();
+            List<int> result = new List<int>();
+
+            foreach (int num in array)
+            {
+                if (num >= min && num <= max)
+                {
+                    result.Add(num);
+                }
+            }
+
+            return result.ToArray();
         }
 
         #endregion
@@ -125,7 +169,19 @@ namespace Assignment
 
         public int[] EX01_FindTargetEnemies(int[] enemyHPs, int mana)
         {
-            throw new NotImplementedException();
+            List<int> selectedEnemies = new List<int>();
+            int currentManaSum = 0;
+
+            foreach (int hp in enemyHPs)
+            {
+                if (currentManaSum + hp <= mana)
+                {
+                    selectedEnemies.Add(hp);
+                    currentManaSum += hp;
+                }
+            }
+
+            return selectedEnemies.ToArray();
         }
 
         #endregion
